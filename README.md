@@ -49,3 +49,13 @@ production:
 ```
 npm start
 ```
+
+## Notes
+* gdal 라이브러리는 운영체제 및 Nodejs 버전에 따라 다시 설치해야할 수 있습니다.
+```
+npm uninstall --save gdal
+npm install --save gdal
+```
+* multer package는 shp 파일을 업로드 하기 위해 사용했다.
+* 업로드 할 shp 파일의 sequelize model 은 선행으로 만들어져있어야한다.
+* shp 파일을 업로드 할 때, 반드시 '.shp, .dbf, .shx' 파일 3개를 업로드 해야한다.
