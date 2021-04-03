@@ -1,0 +1,42 @@
+openapi: 3.0.0
+info:
+  title: nodejs-sequelize-spatial
+  version: 0.0.1
+  description: |
+    shp 업로드 및 조회 API
+     - nodejs-sequelize-spatial
+  termsOfService: 'https://songjang.tistory.com'
+  contact:
+    email: sbjang123456@gmail.com
+  license:
+    name: songjang.co.kr
+#    url: 'http://innopam.com'
+servers:
+  - description: SwaggerHub API Auto Mocking
+    url: 'http://localhost:3000'
+tags:
+  - name: common
+    description: 서비스 관련 공통 API Service
+paths:
+  /comm/alive/server:
+    head:
+      tags:
+        - common
+      summary: check alive server
+      operationId: alive
+      description: |
+        해당 서비스가 작동여부 확인
+      responses:
+        '204':
+          description: Alive Server
+  /comm/alive/db:
+    head:
+      tags:
+        - common
+      summary: check alive db server
+      operationId: checkDB
+      description: |
+        해당 서비스가 작동여부 확인
+      responses:
+        '204':
+          description: Alive DB Server

@@ -1,0 +1,33 @@
+{
+  "appenders": {
+    "app": {
+      "type": "console"
+    },
+    "errorFile": {
+      "type": "file",
+      "filename": "./log/errors.log",
+      "maxLogSize": 524288,
+      "numBackups": 3,
+      "compress": true
+    },
+    "errors": {
+      "type": "logLevelFilter",
+      "level": "ERROR",
+      "appender": "errorFile"
+    }
+  },
+  "categories": {
+    "default": {
+      "appenders": [
+        "app", "errors"
+      ],
+      "level": "info"
+    },
+    "error": {
+      "appenders": [
+        "errors"
+      ],
+      "level": "ERROR"
+    }
+  }
+}
