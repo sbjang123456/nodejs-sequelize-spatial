@@ -15,28 +15,189 @@ servers:
   - description: SwaggerHub API Auto Mocking
     url: 'http://localhost:3000'
 tags:
-  - name: common
-    description: 서비스 관련 공통 API Service
+  - name: test
+    description: Swagger API Test
 paths:
-  /comm/alive/server:
-    head:
+  /test:
+    get:
       tags:
-        - common
-      summary: check alive server
-      operationId: alive
+        - test
+      summary: Get test Api
+      operationId: getTest
       description: |
-        해당 서비스가 작동여부 확인
+        swagger get method test
+      parameters:
+        - in: query
+          name: searchText
+          required: false
+          description: 검색어
+          schema:
+            type: string
       responses:
-        '204':
-          description: Alive Server
-  /comm/alive/db:
-    head:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+    post:
       tags:
-        - common
-      summary: check alive db server
-      operationId: checkDB
+        - test
+      summary: Get test Api
+      operationId: getTest
       description: |
-        해당 서비스가 작동여부 확인
+        swagger get method test
+      requestBody:
+        description: body
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                test1:
+                  type: string
+                  require: false
+                test2:
+                  type: string
+                  require: false
+                test3:
+                  type: string
+                  require: false
       responses:
-        '204':
-          description: Alive DB Server
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+  /test/{id}:
+    get:
+      tags:
+        - test
+      summary: Get Detail test Api
+      operationId: getDetailTest
+      description: |
+        swagger get method test
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: id
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+    patch:
+      tags:
+        - test
+      summary: Patch test Api
+      operationId: patchTest
+      description: |
+        swagger patch method test
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: id
+          schema:
+            type: string
+      requestBody:
+        description: body
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                test1:
+                  type: string
+                  require: false
+                test2:
+                  type: string
+                  require: false
+                test3:
+                  type: string
+                  require: false
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+    put:
+      tags:
+        - test
+      summary: Put test Api
+      operationId: putTest
+      description: |
+        swagger put method test
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: id
+          schema:
+            type: string
+      requestBody:
+        description: body
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                test1:
+                  type: string
+                  require: false
+                test2:
+                  type: string
+                  require: false
+                test3:
+                  type: string
+                  require: false
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+    delete:
+      tags:
+        - test
+      summary: Get test Api
+      operationId: deleteTest
+      description: |
+        swagger get method test
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: id
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+components:
+  schemas:
+    Response:
+      type: object
+      properties:
+        success:
+          type: boolean
+        code:
+          type: integer
+          format: int32
+        msg:
+          type: string
+        result:
+          type: object
