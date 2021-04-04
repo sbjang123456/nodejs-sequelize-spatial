@@ -8,7 +8,10 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --watch ./ --exec ./node_modules/.bin/babel-node server.js"
+    "server:dev": "nodemon --watch ./ --exec ./node_modules/.bin/babel-node server.js",
+    "pm2:startDev": "pm2 start ecosystem.config.js",
+    "pm2:startProd": "pm2 start ecosystem.config.js --env production",
+    "pm2:reload": "pm2 reload nodejs-sequelize-spatial"
   },
   "repository": {
     "type": "git",
