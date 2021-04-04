@@ -47,7 +47,7 @@ production:
 
 ### Development
 ```
-npm start
+npm run server:dev
 ```
 
 ## Notes
