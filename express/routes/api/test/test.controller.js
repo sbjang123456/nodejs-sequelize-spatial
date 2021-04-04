@@ -1,4 +1,4 @@
-const Response = require('express/middlewares/Response');
+const Response = require('../../../middlewares/Response');
 
 module.exports = {
     async getTests(req, res) {
