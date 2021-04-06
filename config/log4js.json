@@ -3,6 +3,18 @@
     "app": {
       "type": "console"
     },
+    "infoFile": {
+      "type": "file",
+      "filename": "./log/info.log",
+      "maxLogSize": 524288,
+      "numBackups": 3,
+      "compress": true
+    },
+    "info": {
+      "type": "logLevelFilter",
+      "level": "INFO",
+      "appender": "infoFile"
+    },
     "errorFile": {
       "type": "file",
       "filename": "./log/errors.log",
@@ -22,12 +34,6 @@
         "app", "errors"
       ],
       "level": "info"
-    },
-    "error": {
-      "appenders": [
-        "errors"
-      ],
-      "level": "ERROR"
     }
   }
 }
