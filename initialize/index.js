@@ -4,7 +4,7 @@ const fs = require('fs');
 const { sequelize } = require('../sequelize');
 const { colorize } = require('../utils/console');
 const log4js = require('log4js');
-const logger = log4js.getLogger('initialize');
+const logger = require('../config/winston')('initialize');
 const os = require('os');
 
 const log4jsConfigure = () => {

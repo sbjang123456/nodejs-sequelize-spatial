@@ -1,6 +1,6 @@
 const app = require('./express/app');
 const http = require('http');
-const logger = require("log4js").getLogger('server');
+const logger = require('./config/winston')('server');
 const { colorize } = require('./utils/console');
 const { initialize, config } = require('./initialize');
 
