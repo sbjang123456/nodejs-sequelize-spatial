@@ -1,5 +1,7 @@
 const express = require('express');
 const cors = require('cors');
+const morgan = require('morgan');
+const { stream } = require('../config/winston')();
 const routes = require('./routes');
 
 const moment = require('moment');
@@ -12,6 +14,12 @@ require('../docs/swagger')(app);
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(
+    morgan(process.env.NODE_ENV !== "production" ? "dev" : "combined", {
+        skip: (req, res) => { return res.statusCode < 400 }, // 400 이상의 에러코드일 때만 로그출력
+        stream
+    })
+);
 
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
