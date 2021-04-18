@@ -13,11 +13,11 @@ const logFormat = printf(({ level, message, label, timestamp }) => {
 
 /**
  *
- * @param path
+ * @param path{string}: label
  * @returns {Logger}
  */
 const getLogger = (path) => {
-    /*
+    /**
      * Log Level
      * error: 0, warn: 1, info: 2, http: 3, verbose: 4, debug: 5, silly: 6
      */
@@ -51,6 +51,9 @@ const getLogger = (path) => {
         ],
     });
 
+    /**
+     * http log
+     */
     const httpLogger = winston.createLogger({
         format: combine(
             label({ label: 'http' }),
