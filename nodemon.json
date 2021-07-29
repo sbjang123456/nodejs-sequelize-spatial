@@ -1,0 +1,6 @@
+{
+  "watch": ["."],
+  "exec": "babel-node server.js",
+  "ext": "js json yaml",
+  "ignore" : ["./log/", "./logs/"]
+}
