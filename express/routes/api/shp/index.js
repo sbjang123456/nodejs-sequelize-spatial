@@ -22,5 +22,4 @@ const fileUpload = multer({
 router.post('/ctprvn', fileUpload, shpController.uploadCtprvn);
 router.post('/sig', fileUpload, shpController.uploadSig);
 
-
 module.exports = router;
