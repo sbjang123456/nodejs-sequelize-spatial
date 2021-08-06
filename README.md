@@ -5,44 +5,8 @@
 ```
 git clone https://github.com/sbjang123456/nodejs-sequelize-spatial.git
 cd nodejs-sequelize-spatial
+docker-compose up -d
 npm install
-```
-
-## Config
-### 구동 모드에 따른 DB 접속 정보 yaml 파일을 생성
-```
-# config/config.yaml
-development:
-  comm:
-    nodePort: 3010
-  db:
-    database: 데이터베이스
-    username: 유저명
-    password: 패스워드
-    host: host
-    port: port
-    dialect: postgres
-    operatorAliases: false
-    quoteIdentifiers: false
-    timezone: "+09:00"
-    logQueryParameters: false
-    logging: true
-
-production:
-  comm:
-    nodePort: 3011
-  db:
-    database: 데이터베이스
-    username: 유저명
-    password: 패스워드
-    host: host
-    port: port
-    dialect: postgres
-    operatorAliases: false
-    quoteIdentifiers: false
-    timezone: "+09:00"
-    logQueryParameters: false
-    logging: true
 ```
 
 ### Development
@@ -51,6 +15,8 @@ npm run server:dev
 ```
 
 ## Notes
+* 프로젝트 실행에 앞서 postgresql + postgis 를 설치하거나 도커를 이용해 실행시켜야한다.
+  - 이 프로젝트에서는 docker-compose 로 postgresql 을 실행시킨다.
 * gdal 라이브러리는 운영체제 및 Nodejs 버전에 따라 다시 설치해야할 수 있습니다.
 ```
 npm uninstall --save gdal
