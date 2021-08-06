@@ -15,189 +15,68 @@ servers:
   - description: SwaggerHub API Auto Mocking
     url: 'http://localhost:3000'
 tags:
-  - name: test
-    description: Swagger API Test
+  - name: shp
+    description: shp upload 및 geojosn 조회
 paths:
-  /test:
-    get:
-      tags:
-        - test
-      summary: Get test Api
-      operationId: getTest
-      description: |
-        swagger get method test
-      parameters:
-        - in: query
-          name: searchText
-          required: false
-          description: 검색어
-          schema:
-            type: string
-      responses:
-        '200':
-          description: successful
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Response'
+  /shp/ctprvn:
     post:
       tags:
-        - test
-      summary: Get test Api
-      operationId: getTest
+        - shp
+      summary: 시도경계 shp 업로드
+#      operationId: getTest
       description: |
-        swagger get method test
+        시경계 shp 업로드
       requestBody:
-        description: body
         content:
-          application/json:
+          multipart/form-data:
             schema:
               type: object
               properties:
-                test1:
-                  type: string
-                  require: false
-                test2:
-                  type: string
-                  require: false
-                test3:
-                  type: string
-                  require: false
+                shapeFile:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
       responses:
         '200':
-          description: successful
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Response'
-  /test/{id}:
-    get:
+          description: ctprvn shp upload success!
+        '500':
+          description: ctprvn shp upload fail!
+  /shp/sig:
+    post:
       tags:
-        - test
-      summary: Get Detail test Api
-      operationId: getDetailTest
+        - shp
+      summary: 시군구경계 shp 업로드
+      #      operationId: getTest
       description: |
-        swagger get method test
-      parameters:
-        - in: path
-          name: id
-          required: true
-          description: id
-          schema:
-            type: string
-      responses:
-        '200':
-          description: successful
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Response'
-    patch:
-      tags:
-        - test
-      summary: Patch test Api
-      operationId: patchTest
-      description: |
-        swagger patch method test
-      parameters:
-        - in: path
-          name: id
-          required: true
-          description: id
-          schema:
-            type: string
+        시군구경계 shp 업로드
       requestBody:
-        description: body
         content:
-          application/json:
+          multipart/form-data:
             schema:
               type: object
               properties:
-                test1:
-                  type: string
-                  require: false
-                test2:
-                  type: string
-                  require: false
-                test3:
-                  type: string
-                  require: false
+                shapeFile:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
       responses:
         '200':
-          description: successful
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Response'
-    put:
-      tags:
-        - test
-      summary: Put test Api
-      operationId: putTest
-      description: |
-        swagger put method test
-      parameters:
-        - in: path
-          name: id
-          required: true
-          description: id
-          schema:
-            type: string
-      requestBody:
-        description: body
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                test1:
-                  type: string
-                  require: false
-                test2:
-                  type: string
-                  require: false
-                test3:
-                  type: string
-                  require: false
-      responses:
-        '200':
-          description: successful
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Response'
-    delete:
-      tags:
-        - test
-      summary: Get test Api
-      operationId: deleteTest
-      description: |
-        swagger get method test
-      parameters:
-        - in: path
-          name: id
-          required: true
-          description: id
-          schema:
-            type: string
-      responses:
-        '200':
-          description: successful
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Response'
-components:
-  schemas:
-    Response:
-      type: object
-      properties:
-        success:
-          type: boolean
-        code:
-          type: integer
-          format: int32
-        msg:
-          type: string
-        result:
-          type: object
+          description: sig shp upload success!
+        '500':
+          description: sig shp upload fail!
+#components:
+#  schemas:
+#    Response:
+#      type: object
+#      properties:
+#        success:
+#          type: boolean
+#        code:
+#          type: integer
+#          format: int32
+#        msg:
+#          type: string
+#        result:
+#          type: object
