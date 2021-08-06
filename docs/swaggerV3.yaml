@@ -10,7 +10,7 @@ info:
     email: sbjang123456@gmail.com
   license:
     name: songjang.co.kr
-#    url: 'http://innopam.com'
+    url: 'https://songjang.tistory.com'
 servers:
   - description: SwaggerHub API Auto Mocking
     url: 'http://localhost:3000'
