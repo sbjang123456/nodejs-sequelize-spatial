@@ -1,8 +1,8 @@
 'use strict';
 
 const router = require('express').Router();
-const test = require('./test');
+const shp = require('./shp');
 
-router.use('/test', test);
+router.use('/shp', shp);
 
 module.exports = router;

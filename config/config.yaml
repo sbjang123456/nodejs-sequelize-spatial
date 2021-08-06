@@ -1,0 +1,35 @@
+##config
+---
+context: "/"
+project: nodejs-sequelize-spatial
+development:
+  comm:
+    nodePort: 3010
+  db:
+    database: gis
+    username: docker
+    password: docker
+    host: localhost
+    port: '25432'
+    dialect: postgres
+    operatorAliases: false
+    quoteIdentifiers: false
+    timezone: "+09:00"
+    logQueryParameters: false
+    logging: true
+
+production:
+  comm:
+    nodePort: 3011
+  db:
+    database: gis
+    username: docker
+    password: docker
+    host: localhost
+    port: '25432'
+    dialect: postgres
+    operatorAliases: false
+    quoteIdentifiers: false
+    timezone: "+09:00"
+    logQueryParameters: false
+    logging: true
