@@ -22,4 +22,7 @@ const fileUpload = multer({
 router.post('/ctprvn', fileUpload, shpController.uploadCtprvn);
 router.post('/sig', fileUpload, shpController.uploadSig);
 
+router.get('/ctprvn', shpController.getGeojsonCtprvnByExtent)
+router.get('/sig', shpController.getGeojsonSigByExtent)
+
 module.exports = router;

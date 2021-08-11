@@ -23,4 +23,23 @@ module.exports = {
         }
     },
 
+    async getGeojsonCtprvnByExtent(req, res) {
+        try {
+            const { extent } = req.query;
+            const geojson = await shpService.getGeojsonCtprvnByExtent(extent);
+            res.status(200).send(geojson);
+        } catch (e) {
+            res.status(500).send('server error');
+        }
+    },
+    async getGeojsonSigByExtent(req, res) {
+        try {
+            const { extent } = req.query;
+            const geojson = await shpService.getGeojsonSigByExtent(extent);
+            res.status(200).send(geojson);
+        } catch (e) {
+            res.status(500).send('server error');
+        }
+    }
+
 }

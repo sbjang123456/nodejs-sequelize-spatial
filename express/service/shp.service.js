@@ -1,5 +1,5 @@
 'use strict';
-const {db: {tlSccoCtprvn, tlSccoSig}, sequelize} = require('../../sequelize');
+const {db: {tlSccoCtprvn, tlSccoSig}, sequelize, Op} = require('../../sequelize');
 const logger = require('../../config/winston')('shp.controller');
 const gdal = require('gdal');
 
@@ -56,5 +56,99 @@ module.exports = {
             throw e;
         }
     },
+
+    async getGeojsonCtprvnByExtent(extent) {
+        try {
+            const [minx, miny, maxx, maxy] = extent;
+            const geojson = await tlSccoCtprvn.findOne({
+                attributes: [
+                    [
+                        sequelize.fn('json_build_object',
+                            'type', 'FeatureCollection', 'features',
+                            sequelize.fn('jsonb_agg',
+                                sequelize.cast(sequelize.fn('ST_AsGeoJSON', sequelize.col('geom')), 'json')
+                            )
+                        ),
+                        'geojson'
+                    ]
+                ],
+                where: {
+                    geom: {
+                        [Op.overlap]: sequelize.fn('st_makeenvelope', minx, miny, maxx, maxy)
+                    }
+                }
+            });
+            return geojson;
+        } catch (e) {
+            logger.error(e);
+            throw e;
+        }
+    },
+    async getGeojsonSigByExtent(extent) {
+        try {
+            const [minx, miny, maxx, maxy] = extent;
+            const geojson = await tlSccoSig.findOne({
+                attributes: [
+                    [
+                        sequelize.fn('json_build_object',
+                            'type', 'FeatureCollection', 'features',
+                            sequelize.fn('jsonb_agg',
+                                sequelize.cast(sequelize.fn('ST_AsGeoJSON', sequelize.col('tlSccoSig.*')), 'json')
+                            )
+                        ),
+                        'geojson'
+                    ]
+                ],
+                where: {
+                    geom: {
+                        [Op.overlap]: sequelize.fn('st_makeenvelope', minx, miny, maxx, maxy)
+                    }
+                }
+            });
+            return geojson;
+        } catch (e) {
+            logger.error(e);
+            throw e;
+        }
+    },
+
+    // postgis 3 미만
+    // async getGeojsonSigByExtent(extent) {
+    //     try {
+    //         const [minx, miny, maxx, maxy] = extent;
+    //         const results = await sequelize.query(
+    //             `select
+    //                 row_to_json(fc) as geojson
+    //             from
+    //                 (
+    //                 select
+    //                     'FeatureCollection' as type,
+    //                     array_to_json(array_agg(f)) as features
+    //                 from
+    //                     (
+    //                         select
+    //                             'Feature' as type,
+    //                             ST_AsGeoJSON(temp.geom)::json as geometry,
+    //                             row_to_json((temp)) as properties
+    //                         from tl_scco_sig as temp
+    //                         where temp.geom && st_makeenvelope(:minx, :miny, :maxx, :maxy)
+    //                     ) as f
+    //                 ) as fc`
+    //             , {
+    //                 replacements: {
+    //                     minx,
+    //                     miny,
+    //                     maxx,
+    //                     maxy
+    //                 },
+    //                 type: sequelize.QueryTypes.SELECT,
+    //             });
+    //
+    //         return results[0];
+    //     } catch (e) {
+    //         logger.error(e.message);
+    //         throw e;
+    //     }
+    // }
 
 }
